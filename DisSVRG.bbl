@@ -1,0 +1,90 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Coates2011An}
+A.~Coates, A.~Y. Ng, H.~Lee, An analysis of single-layer networks in
+  unsupervised feature learning, Journal of Machine Learning Research 15 (2011)
+  215--223.
+
+\bibitem{dahl2012context}
+G.~E. Dahl, D.~Yu, L.~Deng, A.~Acero, Context-dependent pre-trained deep neural
+  networks for large-vocabulary speech recognition, Transactions on Audio,
+  Speech, and Language Processing 20~(1) (2012) 30--42.
+
+\bibitem{collobert2008unified}
+R.~Collobert, J.~Weston, A unified architecture for natural language
+  processing: Deep neural networks with multitask learning, in: Proc. ACM ICML,
+  2008, pp. 160--167.
+
+\bibitem{Dean:2012wx}
+J.~Dean, G.~Corrado, R.~Monga, K.~C. 0010, M.~Devin, Q.~V. Le, M.~Z. Mao,
+  M.~Ranzato, A.~W. Senior, P.~A. Tucker, K.~Yang, A.~Y. Ng, Large scale
+  distributed deep networks., in: Proc. NIPS, 2012, pp. 1232--1240.
+
+\bibitem{Li:2014tt}
+M.~Li, D.~G. Andersen, J.~W. Park, A.~J. Smola, A.~Ahmed, V.~Josifovski,
+  J.~Long, E.~J. Shekita, B.-Y. Su, Scaling distributed machine learning with
+  the parameter server, in: Proc. UENSIX OSDI, 2014, pp. 583--598.
+
+\bibitem{Xing:2015ib}
+E.~P. Xing, Q.~Ho, W.~Dai, J.~K. Kim, J.~Wei, S.~Lee, X.~Zheng, P.~Xie,
+  A.~Kumar, Y.~Yu, Petuum: a new platform for distributed machine learning on
+  big data, Transactions on Big Data 1~(2) (2015) 49--67.
+
+\bibitem{Johnson:9MAvkbgy}
+R.~Johnson, T.~Zhang, Accelerating stochastic gradient descent using predictive
+  variance reduction, in: Advances in Neural Information Processing Systems,
+  2013, pp. 315--323.
+
+\bibitem{Zhao:SZfxEHHg}
+S.-Y. Zhao, W.-J. Li, Fast asynchronous parallel stochastic gradient decent,
+  arXiv:1508.05711.
+
+\bibitem{Reddi:2015vj}
+S.~J. Reddi, A.~Hefny, S.~Sra, B.~Poczos, A.~J. Smola, On variance reduction in
+  stochastic gradient descent and its asynchronous variants, in: Advances in
+  Neural Information Processing Systems, 2015, pp. 2647--2655.
+
+\bibitem{Cavalcante:2009il}
+R.~L. Cavalcante, I.~Yamada, B.~Mulgrew, An adaptive projected subgradient
+  approach to learning in diffusion networks, Transactions on Signal Processing
+  57~(7) (2009) 2762--2774.
+
+\bibitem{Mania:2015wa}
+H.~Mania, X.~Pan, D.~Papailiopoulos, B.~Recht, K.~Ramchandran, M.~I. Jordan,
+  Perturbed iterate analysis for asynchronous stochastic optimization,
+  arXiv:1507.06970.
+
+\bibitem{lian2015asynchronous}
+X.~Lian, Y.~Huang, Y.~Li, J.~Liu, Asynchronous parallel stochastic gradient for
+  nonconvex optimization, in: Advances in Neural Information Processing
+  Systems, 2015, pp. 2719--2727.
+
+\bibitem{Yuan:2015ka}
+J.~Yuan, F.~Gao, Q.~Ho, W.~Dai, J.~Wei, X.~Zheng, E.~P. Xing, T.-Y. Liu, W.-Y.
+  Ma, Lightlda: Big topic models on modest computer clusters, in: Proc. WWW,
+  2015, pp. 1351--1361.
+
+\bibitem{Zhang:2015tp}
+S.~Z. Zhang, Ruiliang, J.~T. Kwok, Fast distributed asynchronous sgd with
+  variance reduction, arXiv:1508.01633.
+
+\bibitem{2015_dai_high_performance_ml}
+W.~Dai, A.~Kumar, J.~Wei, Q.~Ho, G.~A. Gibson, E.~P. Xing, High-performance
+  distributed ml at scale through parameter server consistency models, in:
+  Proc. AAAI, 2015, pp. 79--87.
+
+\bibitem{Li:2014uy}
+M.~Li, D.~G. Andersen, A.~J. Smola, K.~Yu, Communication efficient distributed
+  machine learning with the parameter server, in: Advances in Neural
+  Information Processing Systems, 2014, pp. 19--27.
+
+\bibitem{Dai:2013vj}
+W.~Dai, J.~Wei, X.~Zheng, J.~K. Kim, S.~Lee, J.~Yin, Q.~Ho, E.~P. Xing, Petuum:
+  A framework for iterative-convergent distributed ml, arXiv:1312.7651.
+
+\end{thebibliography}

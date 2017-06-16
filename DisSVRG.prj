@@ -1,0 +1,33 @@
+0 Patch Control
+
+1
+1
+1
+DisSVRG.tex
+6
+1
+0
+
+DisSVRG.tex
+TeX
+420491259 0 -1 36 -1 43 25 25 1766 433 0 498 0 -1 -1 0 0 58 -1 -1 58 1 0 43 -1   0
+reference.bib
+BibTeX:UNIX
+269583346 0 15 2 11 32 0 291 638 582 0 366 242 -1 -1 0 0 27 0 0 27 1 0 32 11   0
+:\softwares\CTEX\MiKTeX\tex\latex\ams\math\amsmath.sty
+TeX:STY:UNIX
+269594610 0 0 1 0 1 638 291 1276 582 0 25 0 -1 -1 0 0 3 0 0 3 1 0 1 0   0
+:\sourcecodes\latex\ELM\Parallel ELM.tex
+TeX
+269496315 0 -1 2848 -1 3228 1276 388 1914 582 0 784 1782 -1 -1 0 0 0 -1 -1 0 1 0 3228 -1   0
+:\sourcecodes\latex\DBMKL-ELM\DBMK-ELM - V8\DBMK-ELM.tex
+TeX
+269496315 0 -1 0 -1 0 1276 0 1914 194 0 25 0 -1 -1 0 0 0 -1 -1 0 1 0 0 -1   0
+:\sourcecodes\latex\DBMKL-ELM\DBMK-ELM - V6\DBMKL-ELM.tex
+TeX
+269496315 0 -1 0 -1 439 125 125 1866 504 0 630 -858 -1 -1 0 0 -1 -1 -1 -1 1 0 439 -1   0
+
+*DisSVRG.tex
+>
+*reference.bib
+<
