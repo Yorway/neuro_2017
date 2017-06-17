@@ -1,17 +1,18 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related work}{}% 2
 \BOOKMARK [1][-]{section.3}{Preliminaries}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Parameter server and data parallelism}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Variance reduced SGD}{section.3}% 5
-\BOOKMARK [1][-]{section.4}{System implementation}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Overview}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Distributed implementation}{section.4}% 8
-\BOOKMARK [1][-]{section.5}{Optimization of DisSVRG}{}% 9
-\BOOKMARK [2][-]{subsection.5.1}{Learning rate with an acceleration factor}{section.5}% 10
-\BOOKMARK [2][-]{subsection.5.2}{Adaptive sampling strategy}{section.5}% 11
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 12
-\BOOKMARK [1][-]{section.7}{Performance evaluation}{}% 13
-\BOOKMARK [2][-]{subsection.7.1}{Convergence}{section.7}% 14
-\BOOKMARK [2][-]{subsection.7.2}{Speedup}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.3}{Wait time}{section.7}% 16
-\BOOKMARK [1][-]{section.8}{Conclusion}{}% 17
+\BOOKMARK [2][-]{subsection.3.1}{Symbols and notations}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Parameter server}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Variance reduced SGD}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{System implementation}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Overview}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Distributed implementation}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Optimization of DisSVRG}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Learning rate with an acceleration factor}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Adaptive sampling strategy}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 13
+\BOOKMARK [1][-]{section.7}{Performance evaluation}{}% 14
+\BOOKMARK [2][-]{subsection.7.1}{Convergence}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.2}{Speedup}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.3}{Wait time}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 18
