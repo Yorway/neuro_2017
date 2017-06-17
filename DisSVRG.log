@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.10)  17 JUN 2017 18:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.10)  17 JUN 2017 20:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -609,8 +609,12 @@ Underfull \hbox (badness 7963) in paragraph at lines 191--192
  2
  []
 
+
+LaTeX Warning: Reference `algorithm_dis_svrg_worker' on page 12 undefined on in
+put line 204.
+
 [12] [13]
-<figures/evaluation_accelerated_factor.pdf, id=345, 578.16pt x 433.62pt>
+<figures/evaluation_accelerated_factor.pdf, id=344, 578.16pt x 433.62pt>
 File: figures/evaluation_accelerated_factor.pdf Graphic file (type pdf)
 
 <use figures/evaluation_accelerated_factor.pdf>
@@ -624,7 +628,7 @@ re.2}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.253 
        <./figures/evaluation_accelerated_factor.pdf>]
-<figures/evaluation_random_strategy.pdf, id=422, 578.16pt x 433.62pt>
+<figures/evaluation_random_strategy.pdf, id=421, 578.16pt x 433.62pt>
 File: figures/evaluation_random_strategy.pdf Graphic file (type pdf)
 
 <use figures/evaluation_random_strategy.pdf>
@@ -632,7 +636,7 @@ Package pdftex.def Info: figures/evaluation_random_strategy.pdf used on input l
 ine 256.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation_random_strategy_wait_time.pdf, id=423, 578.16pt x 433.62pt>
+<figures/evaluation_random_strategy_wait_time.pdf, id=422, 578.16pt x 433.62pt>
 File: figures/evaluation_random_strategy_wait_time.pdf Graphic file (type pdf)
 <use figures/evaluation_random_strategy_wait_time.pdf>
 Package pdftex.def Info: figures/evaluation_random_strategy_wait_time.pdf used 
@@ -659,7 +663,7 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 295.
 
-[19] <figures/evaluation1_converage.pdf, id=566, 578.16pt x 433.62pt>
+[19] <figures/evaluation1_converage.pdf, id=565, 578.16pt x 433.62pt>
 File: figures/evaluation1_converage.pdf Graphic file (type pdf)
 
 <use figures/evaluation1_converage.pdf>
@@ -667,7 +671,7 @@ Package pdftex.def Info: figures/evaluation1_converage.pdf used on input line 3
 05.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation1_dna_converage.pdf, id=567, 578.16pt x 433.62pt>
+<figures/evaluation1_dna_converage.pdf, id=566, 578.16pt x 433.62pt>
 File: figures/evaluation1_dna_converage.pdf Graphic file (type pdf)
 
 <use figures/evaluation1_dna_converage.pdf>
@@ -675,7 +679,7 @@ Package pdftex.def Info: figures/evaluation1_dna_converage.pdf used on input li
 ne 306.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
  [20]
-<figures/evaluation2_speedup.pdf, id=575, 578.16pt x 433.62pt>
+<figures/evaluation2_speedup.pdf, id=574, 578.16pt x 433.62pt>
 File: figures/evaluation2_speedup.pdf Graphic file (type pdf)
 
 <use figures/evaluation2_speedup.pdf>
@@ -683,7 +687,7 @@ Package pdftex.def Info: figures/evaluation2_speedup.pdf used on input line 316
 .
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation2_speedup_dna.pdf, id=576, 578.16pt x 433.62pt>
+<figures/evaluation2_speedup_dna.pdf, id=575, 578.16pt x 433.62pt>
 File: figures/evaluation2_speedup_dna.pdf Graphic file (type pdf)
 
 <use figures/evaluation2_speedup_dna.pdf>
@@ -702,14 +706,14 @@ ge.pdf
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/evaluation1_dna_co
 nverage.pdf): PDF inclusion: multiple pdfs with page group included in a single
  page
->] <figures/evaluation3_delay.pdf, id=671, 578.16pt x 433.62pt>
+>] <figures/evaluation3_delay.pdf, id=670, 578.16pt x 433.62pt>
 File: figures/evaluation3_delay.pdf Graphic file (type pdf)
 
 <use figures/evaluation3_delay.pdf>
 Package pdftex.def Info: figures/evaluation3_delay.pdf used on input line 327.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation3_delay_dna.pdf, id=672, 578.16pt x 433.62pt>
+<figures/evaluation3_delay_dna.pdf, id=671, 578.16pt x 433.62pt>
 File: figures/evaluation3_delay_dna.pdf Graphic file (type pdf)
 
 <use figures/evaluation3_delay_dna.pdf>
@@ -760,15 +764,18 @@ Package rerunfilecheck Info: File `DisSVRG.out' has not changed.
 (rerunfilecheck)             Checksum: 9F3D2DB2127A703A823FDFD0321DA16F;1037.
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 344.
  ) 
 Here is how much of TeX's memory you used:
- 8144 strings out of 493089
- 117124 string characters out of 6134842
+ 8145 strings out of 493089
+ 117151 string characters out of 6134842
  204782 words of memory out of 5000000
- 11321 multiletter control sequences out of 15000+600000
+ 11322 multiletter control sequences out of 15000+600000
  52166 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,10n,30p,2484b,494s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -791,10 +798,10 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 /type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on DisSVRG.pdf (26 pages, 469019 bytes).
+Output written on DisSVRG.pdf (26 pages, 468745 bytes).
 PDF statistics:
- 920 PDF objects out of 1000 (max. 8388607)
- 511 compressed objects within 6 object streams
+ 919 PDF objects out of 1000 (max. 8388607)
+ 510 compressed objects within 6 object streams
  110 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
