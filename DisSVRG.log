@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.10)  17 JUN 2017 16:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.10)  17 JUN 2017 18:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -444,9 +444,6 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 )
 (./DisSVRG.aux
 
-LaTeX Warning: Label `notations' multiply defined.
-
-
 LaTeX Warning: Label `equa_vr_gradient' multiply defined.
 
 )
@@ -561,154 +558,170 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 Package mathptmx Warning: There are no bold math fonts on input line 50.
 
 [2] [3] [4] [5] [6]
-<figures/data_parallelism_on_PS.pdf, id=173, 722.7pt x 418.32286pt>
+
+Package natbib Warning: Citation `ho2013more' on page 7 undefined on input line
+ 95.
+
+
+Package natbib Warning: Citation `xing2015petuum' on page 7 undefined on input 
+line 95.
+
+
+Package natbib Warning: Citation `dai2015high' on page 7 undefined on input lin
+e 99.
+
+
+Package natbib Warning: Citation `ho2013more' on page 7 undefined on input line
+ 99.
+
+[7] <figures/data_parallelism_on_PS.pdf, id=183, 722.7pt x 418.32286pt>
 File: figures/data_parallelism_on_PS.pdf Graphic file (type pdf)
 
 <use figures/data_parallelism_on_PS.pdf>
 Package pdftex.def Info: figures/data_parallelism_on_PS.pdf used on input line 
-100.
+104.
 (pdftex.def)             Requested size: 176.40198pt x 102.1038pt.
 
-<figures/PS_topology.pdf, id=174, 421.09319pt x 165.0165pt>
+<figures/PS_topology.pdf, id=184, 421.09319pt x 165.0165pt>
 File: figures/PS_topology.pdf Graphic file (type pdf)
 
 <use figures/PS_topology.pdf>
-Package pdftex.def Info: figures/PS_topology.pdf used on input line 101.
+Package pdftex.def Info: figures/PS_topology.pdf used on input line 105.
 (pdftex.def)             Requested size: 176.40198pt x 69.12767pt.
- [7pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
+ [8pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.115 \begin{equation}
-                       <./figures/data_parallelism_on_PS.pdf> <./figures/PS_top
-ology.pdf
+l.123 \end{equation}
+                     That is to say, the variance reduced gradient is equiva...
+ <./figures/data_parallelism_on_PS.pdf> <./figures/PS_topology.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/PS_topology.pdf): 
 PDF inclusion: multiple pdfs with page group included in a single page
->] [8]
+>] [9]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 147.
- [9] [10]
-Underfull \hbox (badness 7963) in paragraph at lines 204--205
+put line 134.
+ [10] [11]
+Underfull \hbox (badness 7963) in paragraph at lines 191--192
 [] \OT1/ptm/m/n/10.95 ran-domly sam-ple a non-negative num-ber $\OML/ztmcm/m/it
 /10.95 i$ \OT1/ptm/m/n/10.95 with $\OML/ztmcm/m/it/10.95 i \OMS/ztmcm/m/n/10.95
  2
  []
 
-[11] [12]
-<figures/evaluation_accelerated_factor.pdf, id=340, 578.16pt x 433.62pt>
+[12] [13]
+<figures/evaluation_accelerated_factor.pdf, id=345, 578.16pt x 433.62pt>
 File: figures/evaluation_accelerated_factor.pdf Graphic file (type pdf)
 
 <use figures/evaluation_accelerated_factor.pdf>
 Package pdftex.def Info: figures/evaluation_accelerated_factor.pdf used on inpu
-t line 252.
+t line 241.
 (pdftex.def)             Requested size: 180.0pt x 134.99644pt.
- [13pdfTeX warning (ext4): destination with the same identifier (name{figure.2}
-) has been already used, duplicate ignored
+ [14] [15pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.262 
-       <./figures/evaluation_accelerated_factor.pdf>] [14]
-<figures/evaluation_random_strategy.pdf, id=418, 578.16pt x 433.62pt>
+l.253 
+       <./figures/evaluation_accelerated_factor.pdf>]
+<figures/evaluation_random_strategy.pdf, id=422, 578.16pt x 433.62pt>
 File: figures/evaluation_random_strategy.pdf Graphic file (type pdf)
 
 <use figures/evaluation_random_strategy.pdf>
 Package pdftex.def Info: figures/evaluation_random_strategy.pdf used on input l
-ine 267.
+ine 256.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation_random_strategy_wait_time.pdf, id=419, 578.16pt x 433.62pt>
+<figures/evaluation_random_strategy_wait_time.pdf, id=423, 578.16pt x 433.62pt>
 File: figures/evaluation_random_strategy_wait_time.pdf Graphic file (type pdf)
 <use figures/evaluation_random_strategy_wait_time.pdf>
 Package pdftex.def Info: figures/evaluation_random_strategy_wait_time.pdf used 
-on input line 268.
+on input line 257.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
- [15pdfTeX warning (ext4): destination with the same identifier (name{figure.3}
+ [16pdfTeX warning (ext4): destination with the same identifier (name{figure.3}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.276 
+l.265 
        <./figures/evaluation_random_strategy.pdf> <./figures/evaluation_random_
 strategy_wait_time.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/evaluation_random_
 strategy_wait_time.pdf): PDF inclusion: multiple pdfs with page group included 
 in a single page
->] [16] [17]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 306.
+>] [17] [18]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 295.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 306.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 295.
 
-[18] <figures/evaluation1_converage.pdf, id=562, 578.16pt x 433.62pt>
+[19] <figures/evaluation1_converage.pdf, id=566, 578.16pt x 433.62pt>
 File: figures/evaluation1_converage.pdf Graphic file (type pdf)
 
 <use figures/evaluation1_converage.pdf>
 Package pdftex.def Info: figures/evaluation1_converage.pdf used on input line 3
-16.
+05.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation1_dna_converage.pdf, id=563, 578.16pt x 433.62pt>
+<figures/evaluation1_dna_converage.pdf, id=567, 578.16pt x 433.62pt>
 File: figures/evaluation1_dna_converage.pdf Graphic file (type pdf)
 
 <use figures/evaluation1_dna_converage.pdf>
 Package pdftex.def Info: figures/evaluation1_dna_converage.pdf used on input li
-ne 317.
+ne 306.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
- [19]
-<figures/evaluation2_speedup.pdf, id=572, 578.16pt x 433.62pt>
+ [20]
+<figures/evaluation2_speedup.pdf, id=575, 578.16pt x 433.62pt>
 File: figures/evaluation2_speedup.pdf Graphic file (type pdf)
 
 <use figures/evaluation2_speedup.pdf>
-Package pdftex.def Info: figures/evaluation2_speedup.pdf used on input line 327
+Package pdftex.def Info: figures/evaluation2_speedup.pdf used on input line 316
 .
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation2_speedup_dna.pdf, id=573, 578.16pt x 433.62pt>
+<figures/evaluation2_speedup_dna.pdf, id=576, 578.16pt x 433.62pt>
 File: figures/evaluation2_speedup_dna.pdf Graphic file (type pdf)
 
 <use figures/evaluation2_speedup_dna.pdf>
 Package pdftex.def Info: figures/evaluation2_speedup_dna.pdf used on input line
- 328.
+ 317.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
- [20pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
+ [21pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.335 
+l.324 
        <./figures/evaluation1_converage.pdf> <./figures/evaluation1_dna_convera
 ge.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/evaluation1_dna_co
 nverage.pdf): PDF inclusion: multiple pdfs with page group included in a single
  page
->] <figures/evaluation3_delay.pdf, id=668, 578.16pt x 433.62pt>
+>] <figures/evaluation3_delay.pdf, id=671, 578.16pt x 433.62pt>
 File: figures/evaluation3_delay.pdf Graphic file (type pdf)
 
 <use figures/evaluation3_delay.pdf>
-Package pdftex.def Info: figures/evaluation3_delay.pdf used on input line 338.
+Package pdftex.def Info: figures/evaluation3_delay.pdf used on input line 327.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
 
-<figures/evaluation3_delay_dna.pdf, id=669, 578.16pt x 433.62pt>
+<figures/evaluation3_delay_dna.pdf, id=672, 578.16pt x 433.62pt>
 File: figures/evaluation3_delay_dna.pdf Graphic file (type pdf)
 
 <use figures/evaluation3_delay_dna.pdf>
 Package pdftex.def Info: figures/evaluation3_delay_dna.pdf used on input line 3
-39.
+28.
 (pdftex.def)             Requested size: 176.40198pt x 132.2969pt.
- [21pdfTeX warning (ext4): destination with the same identifier (name{figure.5}
+ [22pdfTeX warning (ext4): destination with the same identifier (name{figure.5}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.347 
+l.336 
        <./figures/evaluation2_speedup.pdf> <./figures/evaluation2_speedup_dna.p
 df
 
@@ -716,12 +729,12 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/evaluation2_speedu
 p_dna.pdf): PDF inclusion: multiple pdfs with page group included in a single p
 age
 >]
-Overfull \hbox (9.48828pt too wide) in paragraph at lines 349--350
+Overfull \hbox (9.48828pt too wide) in paragraph at lines 338--339
 []\OT1/ptm/m/n/10.95 We thank the Na-tional Su-per-com-put-ing Cen-ter in Chang
 -sha for pro-vid-ing \OT1/ptm/m/it/10.95 Tianhe-
  []
 
-(./DisSVRG.bbl [22pdfTeX warning (ext4): destination with the same identifier (
+(./DisSVRG.bbl [23pdfTeX warning (ext4): destination with the same identifier (
 name{figure.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -733,26 +746,29 @@ s/evaluation3_delay_dna.pdf
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/evaluation3_delay_
 dna.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
 e
->] [23] [24])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 355.
- [25]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 355.
+>] [24] [25])
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 344.
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 344.
  (./DisSVRG.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 355.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 355.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 344.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 344.
 Package rerunfilecheck Info: File `DisSVRG.out' has not changed.
-(rerunfilecheck)             Checksum: 64054F67C136FEDE530C4DA66795BD9D;1096.
+(rerunfilecheck)             Checksum: 9F3D2DB2127A703A823FDFD0321DA16F;1037.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 355.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 344.
  ) 
 Here is how much of TeX's memory you used:
- 8140 strings out of 493089
- 117080 string characters out of 6134842
- 204798 words of memory out of 5000000
- 11319 multiletter control sequences out of 15000+600000
+ 8144 strings out of 493089
+ 117124 string characters out of 6134842
+ 204782 words of memory out of 5000000
+ 11321 multiletter control sequences out of 15000+600000
  52166 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,10n,30p,2484b,494s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -775,10 +791,10 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 /type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on DisSVRG.pdf (25 pages, 465104 bytes).
+Output written on DisSVRG.pdf (26 pages, 469019 bytes).
 PDF statistics:
- 915 PDF objects out of 1000 (max. 8388607)
- 507 compressed objects within 6 object streams
- 108 named destinations out of 1000 (max. 500000)
- 200 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 920 PDF objects out of 1000 (max. 8388607)
+ 511 compressed objects within 6 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

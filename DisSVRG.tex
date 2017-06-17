@@ -55,8 +55,7 @@ Machine learning based applications such as image recognition \cite{Coates2011An
 Many machine learning algorithms can be described by the optimization problem like (\ref{equa_loss_minimization}),
 \begin{equation}
 \label{equa_loss_minimization}
-
-\min f(\omega),~~~~~f(\omega)=\frac{1}{n}\sum\limits_{i=1}^n f_i(\omega) + R(\omega),\\
+\min f(\omega),~~~~~f(\omega)=\frac{1}{n}\sum\limits_{i=1}^n f_i(\omega) + R(\omega).
 \end{equation}  Here, $\nabla$ stands for the derivation operation. $f(\omega)$ is generally called the loss function.  $\omega$ represents the parameters of a model, that is, the parameters needed to be updated during the iterations. $n$ means the size of training data. $R(\omega)$ represents the regularization item which is used to avoid overfitting. The regularization item represents the prior knowledge about the problem. For example, when we want to obtain a sparse solution, that is, the optimal parameters contain many zeros, $R(\omega)$ is usually formulated as $L_1$ norm, namely, $R(\omega) = \lVert \omega \rVert_1$. Besides, ridge regression modes use the $L_2$ norm as the regularization item, that is, $R(\omega) = \lVert \omega \rVert_2$. Some other regularizations can be used in the optimization objective \cite{Vidaurre:2013cu, Gnecco2015Learning, Cucker2002On}, but it is out of the scope of the paper. We recommend readers to read those references for more details. 
 
 The loss function $f(\omega)$ can be minimized by updating the parameters iteratively, which is called the learning process. Conventionally, the gradient descent method is used to compute the global average gradient, i.e., $\nabla f(\omega_{t-1})$, and then uses it to update the parameters during an iteration. Here, $t$ represents the $t$th iteration. Since $\nabla f(\omega_{t-1})$ needs $n$ derivations, which are time-consuming, the gradient descent method is not practical for a large scale learning task.  An alternative approach  is Stochastic  Gradient Descent (SGD) and its variants. SGD randomly samples an instance from the training data, and then use it to compute the local gradient, i.e., $\nabla f_i(\omega_{t-1})$, instead of the global average gradient.   The parameters are thus updated by using the local gradient. Since $\nabla f_i(\omega_{t-1})$ merely needs one derivation for the local gradient during an iteration,  it is efficient for the large scale learning tasks.  However, since $f_i$ is randomly sampled, the variance exists between the local gradient $\nabla f_i(\omega_{t-1})$ and the global average gradient $\nabla f(\omega_{t-1})$, which slows the convergence of the loss function i.e., $f(\omega)$, of a machine learning algorithm.  Specifically, when the parameters are close to the optimal state, it is difficult to decrease the loss function due to the variance. Conventionally, the variance is reduced by using a decaying learning rate to update the parameters. That is,  the value of the learning rate is decreased when the iteration proceeds. Although the variance can be reduced by the decaying learning rate, the small learning rate unavoidably  leads to the slow convergence.
@@ -84,44 +83,28 @@ With the proliferation of data, a complex and big model can be learned by feedin
 The variance reduced SGD denoted by \emph{SVRG} is adopted in \cite{Johnson:9MAvkbgy}, which is  effective to reduce the variance of SGD. However, SVRG is a serial version, and designed to be run on a single node. Thus, it is not suitable for a large scale learning task. Asynchronous and parallel versions of SVRG partially solve this problem \cite{Zhao:SZfxEHHg, Reddi:2015vj, Mania:2015wa, lian2015asynchronous, Pan:2016wx}. Such SVRG versions use the lock-free method to update the parameters in parallel for multiple learning threads in a node. However, the design of such work targets at a multicore system on a single node. When the size of training data or the number of parameters  is huge so that they can not be stored in one node, SVRG and those variants fail immediately. Our proposed variance reduced SGD is designed for  the large scale learning tasks in a cluster. We can partition the data into multiple blocks, and allocate them to multiple worker machines, which is suitable to accelerate SGD in a cluster. More recently, there are many new variants of the variance reduced SGD such as SAGA \cite{Defazio:2014vu}, S2GD \cite{Richtarik:2013te}, SVRG++ \cite{Allen2015Improved}, Prox-SVRG \cite{Xiao:2014vw}. Those great researches have proposed advanced variance reduction techniques, which can be used to improve our method. However, it is out of the scope of the paper, and we leave it as the future work.
 
 
-
-
-
-
-
-
+\section{Preliminaries}
+\label{sect_preliminary}
+In this section, we present the preliminaries including the parameter server system and the data parallelism, and the variance reduced SGD.
 \subsection{Parameter server and data parallelism}
 \label{parameter server}
 
-In this subsection, we will introduce the data-parallel computation paradigm and the parameter server abstraction that facilitates large-scale data-parallel computation.
-
-In data-parallel machine learning the data set $D$ is partitioned and assigned to worker machines, indexed by $p=1, \ldots, P$, as Fig. \ref{figure_data_parallelism_on_PS} shows. We denote the $p$-th data partition by $D_p$ and the model parameters at iteration $t$ by $\omega^t$. The data-parallel computation updates the model parameters as follows:
+In data-parallel machine learning, the data set $D$ is partitioned into $P$ blocks. The blocks of data are assigned to the worker machines which are indexed by $p=1, \ldots, P$. We denote the $p$th data block by $D_p$. The data parallelism updates the model parameters as follows:
 \begin{equation}
-\omega^t=G(\omega^{t-1}, \sum_{p=1}^P\Delta(\omega^{t-1}, D_p)).
-\end{equation}
-Here, $\Delta()$ performs computation on data partition $D_p$ independently using full model parameters $\omega^{t-1}$ pulled from the model server, and $G()$ aggregates current model parameters $\omega^{t-1}$ with the sum of $\Delta()$ outputs that are computed by the workers and pushed to the server\cite{ho2013more} \cite{xing2015petuum}.
-For example, in SGD, the update equation can be
+\omega^s=G\left(\omega^{s-1}, \sum_{p=1}^P\Delta(\omega^{s-1}, D_p)\right).
+\end{equation} Here, $\Delta(\cdot)$ means the update of the parameters which is obtained according to the data partition $D_p$ on a worker. In specific, the worker needs to pull the initial parameters from the model server. After that, it computes the update of the parameters, i.e. $\Delta(\omega^{s-1}, D_p)$. $G(\cdot)$ represents the aggregation of the updates of the parameters on a server. Specifically, the server collects all the updates from the workers, and then conduct the aggregation \cite{ho2013more} \cite{xing2015petuum}. Taking SGD as an example, the update rule can be
 \begin{equation}
-\omega^t=\omega^{t-1} + \sum_{p=1}^P\eta \nabla f_i(\omega^{t-1}),
+\omega^s=\omega^{s-1} + \sum_{p=1}^P\eta \Delta(\omega^{s-1}, D_p),
 \end{equation}
-where $G()$ is specificized as an additive operation and $\Delta(\omega^{t-1}, D_p)$ is specificized as the product of the learning rate $\eta$ and the gradient computed using the sample $i$ from $D_p$.
-
-Parameter server follows a simple table-based API for pull/push, i.e., reading/updating, to shared parameters $\omega$. 
-The model parameters $\omega$ can be divided (sharded) and stored over multiple servers and thus not limited by a single machine's memory.
-Servers and workers interact via a bipartite topology, as Fig. \ref{figure_PS_topology} shows. Note that this is the logical topology. Physically the servers can collocate with the wokers to utilize CPU on all machines and a normal configuration would include a server process on each of the worker machines. \cite{dai2015high} \cite{ho2013more}
-
-
-
-\subsection{Parameter server and data parallelism}
-
+where $G(\cdot)$ is initialized as an additive operation, and $\Delta(\omega^{s-1}, D_p)$ is usually initialized  as the product of the learning rate $\eta$ and the gradient according to the data partition $D_p$. As shown in Figure \ref{figure_data_parallelism},  servers and workers interact via a bipartite topology. The model parameters $\omega$ can be divided and stored on multiple servers and thus not limited by a single machine's memory in a parameter server system. Every worker pulls the parameters from the server, and then  obtain the update of the parameters. Finally, those updates are pushed to the servers, and are aggregated on those servers. The servers can collaborate with the workers to utilize CPUs on all machines when we conduct a large scale machine learning task \cite{dai2015high} \cite{ho2013more}.
 
 \begin{figure*}
 \centering
-
+\label{figure_data_parallelism}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/data_parallelism_on_PS}\label{figure_data_parallelism_on_PS}}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/PS_topology}\label{figure_PS_topology}}
 \caption{Illustration of data parallelism and Parameter Server topology}
-
+\end{figure*}
 
 
 \subsection{Variance reduced SGD}
@@ -140,26 +123,10 @@ The variance reduced SGD uses a variance reduced gradient to reduce the stochast
 \end{equation} That is to say, the variance reduced gradient is equivalent to the full gradient at every iteration in expectation. It is worthy noting that $\nabla \tilde{f}$ is a stale full gradient, which is updated at the start of an epoch and kept fixed during the iterations in an epoch.  Therefore, the variance reduced gradient reduces the stochastic noise significantly, but leads to less computational cost. Extensive empirical studies show that the variance reduced gradient leads to the comparable computational cost of SGD, but obtains the equivalent convergence performance of gradient descent.
 
 
-%\subsection{Assumptions}
-%Conventionally, each $f_i(\omega)$ in the optimization problem \ref{equa_loss_minimization} is a $L$-smooth function. That is, there exist a non-negative $L$, and for every $a$ and $b$, the following inequality holds.
-%
-%\begin{equation}
-%\label{equa_l_smooth}
-%f_i(a)\le f_i(b)+\nabla f_i(b)^\mathrm{T} (a-b)+\frac{L}{2}\parallel a-b\parallel^2
-% \end{equation}
-%
-%Besides, the loss function $f(\omega)$  in the optimization problem \ref{equa_loss_minimization} is $\gamma$-strongly convex, which means that there exists a non-negative $\gamma$, and for every $a$ and $b$, the following inequality holds.
-%
-%\begin{equation}
-%\label{equa_gamma_convex}
-%f(a)\ge f(b)+\nabla f(b)^\mathrm{T} (a-b)+\frac{\gamma}{2}\parallel a-b\parallel^2
-%\end{equation}
-%
-%It is worth noting that these assumptions are not tight, and many machine learning algorithms are under these assumptions including regression and classification. These assumptions will be exploited to optimize our version of SGD in Section \ref{optimization_sgd}.
-
 
 \section{System implementation}
 \label{implementation}
+In the section, we present the details of the system implementation including the algorithm and the distributed mechnism.
 \subsection{Overview}
 Our distributed and asynchronous SGD denoted by DisSVRG is presented  in Algorithm \ref{algorithm_dis_svrg}. DisSVRG consists of three ingredients: the epochs of iterations (the outer \emph{for} loop at Line 2), the random sampling strategy of the training data (the inner \emph{for} loop at Line 6) and the update rule of the parameters (Lines 8-9). DisSVRG is launched by the servers, and all the workers will be informed by message passing. Once a worker receives the message from a server, it pulls a copy of the global parameters from a server, and  begins conducting the calculations during the epoch. The random sampling strategy is conducted by the workers. When a worker randomly samples an instance from the training data, it computes the variance reduced gradient (Line 8), and updates the local parameters with the local gradient (Line 9). When the local parameters have been updated, the newly learned parameters will be sent to a server. The inter-node communication is conducted by the asynchronous communication protocol, i.e., SSP. The server receives these learned parameters  and aggregates them. The aggregated parameters are the latest global parameters which will be sent to workers for the next iteration. The details of communication across nodes and aggregation of parameters will be demonstrated in Section \ref{implementation}.
 
@@ -172,12 +139,12 @@ Our distributed and asynchronous SGD denoted by DisSVRG is presented  in Algorit
             \State $\tilde{\omega}=\tilde{\omega}^{s-1}$.
             \State $\mu=\frac{1}{n}\sum\limits_{i=1}^n\nabla f_i(\tilde{\omega})$.
             \State $\omega_0=\tilde{\omega}$.
-            \For {$t=1,2,...m$}
+            \For {$t=1,2,..., m$}
                 \State randomly sample $i_t\in\{0,1,2,...,m\}$.
                 \State $v_t=\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\mu$. $ \verb|\\|$Variance reduced gradient.
                 \State $\omega_t=\omega_{t-1}-\eta v_t$. $ \verb|\\|$Update the parameters with variance reduction gradient.
            \EndFor
-           \State $\tilde{\omega}_s=\omega_m$. $ \verb|\\|$Push the newly learned parameters to the servers, and aggregate them with the global parameters.
+           \State $\tilde{\omega}^s=\omega_m$. $ \verb|\\|$Push the newly learned parameters to the servers, and aggregate them with the global parameters.
        \EndFor
     \end{algorithmic}
 \end{algorithm}
@@ -256,6 +223,8 @@ It is obvious that the variance of DisSVRG is reduced as expected. Unlike Petuum
 
 \section{Optimization of DisSVRG}
 \label{optimization_sgd}
+In the section, we optimize the proposed method DisSVRG by adopting an adaptive learning rate and sampling strategy.
+
 \subsection{Learning rate with an acceleration factor}
 Generally, variance reduction technique accelerates machine learning algorithms by using a constant learning rate. Even though the constant learning rate performs well for $L$-smooth and $\gamma$-strongly convex objection function, some intrinsic properties can be exploited to accelerate the convergence of the machine learning algorithms.
 

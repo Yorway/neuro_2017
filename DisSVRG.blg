@@ -3,11 +3,14 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DisSVRG.aux
 The style file: elsarticle-num.bst
 Database file #1: reference.bib
+Warning--I didn't find a database entry for "ho2013more"
+Warning--I didn't find a database entry for "xing2015petuum"
+Warning--I didn't find a database entry for "dai2015high"
 Warning--empty journal in Pan:2016wx
 Warning--empty pages in Allen2015Improved
 You've used 27 entries,
             2937 wiz_defined-function locations,
-            840 strings with 10646 characters,
+            843 strings with 10681 characters,
 and the built_in function-call counts, 9952 in all, are:
 = -- 880
 > -- 417
@@ -46,4 +49,4 @@ warning$ -- 2
 while$ -- 76
 width$ -- 29
 write$ -- 229
-(There were 2 warnings)
+(There were 5 warnings)
