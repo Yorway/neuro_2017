@@ -86,6 +86,44 @@ The variance reduced SGD denoted by \emph{SVRG} is adopted in \cite{Johnson:9MAv
 \section{Preliminaries}
 \label{sect_preliminary}
 In this section, we present the preliminaries including the parameter server system and the data parallelism, and the variance reduced SGD.
+\subsection{Notations}
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{The highlight notations} \label{tab:notations}
+\begin{tabular}{|c|c|}
+\hline 
+Symbols & Notations\tabularnewline
+\hline 
+$\omega$ & the global parameters\tabularnewline
+\hline 
+$i_{t}$ & the index of an instance picked at the $t$th iteration randomly\tabularnewline
+\hline 
+$\nabla f_{i_{t}}$ & the stochastic gradient\tabularnewline
+\hline 
+$\nabla \tilde{f}_{i_t}$ & the noise reducer\tabularnewline
+\hline 
+$\nabla \tilde{f}$ & the stale full gradient\tabularnewline
+\hline 
+$\nu_t$ & the variance reduced gradient\tabularnewline
+\hline 
+$e_p$ & the number of epoches in the worker $p$\tabularnewline
+\hline 
+$\tau$ & the delay bound\tabularnewline
+\hline 
+$\sigma$ & the acceleration factor\tabularnewline
+\hline 
+$\delta$ & used in the adaptive sampling strategy \tabularnewline
+\hline 
+$\eta$ & the learning rate\tabularnewline
+\hline 
+$\parallel \cdot \parallel$ & the 2-norm defautly\tabularnewline
+\hline 
+$x_i, y_i$ & the $i$th instance and its label\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
 \subsection{Parameter server and data parallelism}
 \label{parameter server}
 
@@ -94,16 +132,17 @@ In data-parallel machine learning, the data set $D$ is partitioned into $P$ bloc
 \omega^s=G\left(\omega^{s-1}, \sum_{p=1}^P\Delta(\omega^{s-1}, D_p)\right).
 \end{equation} Here, $\Delta(\cdot)$ means the update of the parameters which is obtained according to the data partition $D_p$ on a worker. In specific, the worker needs to pull the initial parameters from the model server. After that, it computes the update of the parameters, i.e. $\Delta(\omega^{s-1}, D_p)$. $G(\cdot)$ represents the aggregation of the updates of the parameters on a server. Specifically, the server collects all the updates from the workers, and then conduct the aggregation \cite{ho2013more} \cite{xing2015petuum}. Taking SGD as an example, the update rule can be
 \begin{equation}
-\omega^s=\omega^{s-1} + \sum_{p=1}^P\eta \Delta(\omega^{s-1}, D_p),
+\omega^s=\omega^{s-1} + \sum_{p=1}^P \Delta(\omega^{s-1}, D_p),
 \end{equation}
-where $G(\cdot)$ is initialized as an additive operation, and $\Delta(\omega^{s-1}, D_p)$ is usually initialized  as the product of the learning rate $\eta$ and the gradient according to the data partition $D_p$. As shown in Figure \ref{figure_data_parallelism},  servers and workers interact via a bipartite topology. The model parameters $\omega$ can be divided and stored on multiple servers and thus not limited by a single machine's memory in a parameter server system. Every worker pulls the parameters from the server, and then  obtain the update of the parameters. Finally, those updates are pushed to the servers, and are aggregated on those servers. The servers can collaborate with the workers to utilize CPUs on all machines when we conduct a large scale machine learning task \cite{dai2015high} \cite{ho2013more}.
+where $G(\cdot)$ is initialized as an additive operation, and $\Delta(\omega^{s-1}, D_p)$ is usually initialized  as the product of the learning rate $\eta$ and the gradient according to the data partition $D_p$. As shown in Figure \ref{figure_data_parallelism},  servers and workers interact via a bipartite topology. The model parameters $\omega$ can be divided and stored on multiple servers and thus not limited by a single machine's memory in a parameter server system. Every worker pulls the parameters from the server, and then  obtain the update of the parameters. Finally, those updates are pushed to the servers, and are aggregated on those servers. The servers can collaborate with the workers to utilize CPUs on all machines when we conduct a large scale machine learning task \cite{ho2013more} \cite{dai2015high}.
 
 \begin{figure*}
 \centering
 \label{figure_data_parallelism}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/data_parallelism_on_PS}\label{figure_data_parallelism_on_PS}}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/PS_topology}\label{figure_PS_topology}}
-\caption{Illustration of data parallelism and Parameter Server topology}
+\caption{Illustration of data parallelism and parameter server topology}
+\label{figure_data_parallelism}
 \end{figure*}
 
 
@@ -128,7 +167,7 @@ The variance reduced SGD uses a variance reduced gradient to reduce the stochast
 \label{implementation}
 In the section, we present the details of the system implementation including the algorithm and the distributed mechnism.
 \subsection{Overview}
-Our distributed and asynchronous SGD denoted by DisSVRG is presented  in Algorithm \ref{algorithm_dis_svrg}. DisSVRG consists of three ingredients: the epochs of iterations (the outer \emph{for} loop at Line 2), the random sampling strategy of the training data (the inner \emph{for} loop at Line 6) and the update rule of the parameters (Lines 8-9). DisSVRG is launched by the servers, and all the workers will be informed by message passing. Once a worker receives the message from a server, it pulls a copy of the global parameters from a server, and  begins conducting the calculations during the epoch. The random sampling strategy is conducted by the workers. When a worker randomly samples an instance from the training data, it computes the variance reduced gradient (Line 8), and updates the local parameters with the local gradient (Line 9). When the local parameters have been updated, the newly learned parameters will be sent to a server. The inter-node communication is conducted by the asynchronous communication protocol, i.e., SSP. The server receives these learned parameters  and aggregates them. The aggregated parameters are the latest global parameters which will be sent to workers for the next iteration. The details of communication across nodes and aggregation of parameters will be demonstrated in Section \ref{implementation}.
+Our distributed and asynchronous SGD denoted by DisSVRG is presented  in Algorithm \ref{algorithm_dis_svrg}. DisSVRG consists of three ingredients: the epochs of iterations (the outer \emph{for} loop at Line 2), the random sampling strategy of the training data (the inner \emph{for} loop at Line 6) and the update rule of the parameters (Lines 8-9). DisSVRG is launched by the servers, and all the workers will be informed by message passing. Once a worker receives the message from the server, it pulls a copy of the global parameters from the server, and  begins conducting the calculations during the epoch. The random sampling strategy is conducted by the workers. When a worker randomly samples an instance from the training data, it computes the variance reduced gradient (Line 8), and updates the local parameters with the local gradient (Line 9). When the local parameters have been updated, the newly learned parameters will be sent to a server. The inter-node communication is conducted by the asynchronous communication protocol, i.e., SSP. The server receives these learned parameters  and aggregates them. The aggregated parameters are the latest global parameters which will be sent to workers for the next iteration. The details of communication across nodes and aggregation of parameters will be demonstrated in Section \ref{implementation}.
 
 \begin{algorithm}[t]
     \caption{DisSVRG}
