@@ -38,7 +38,7 @@
 \address[mysecondaryaddress]{State Key Laboratory of High Performance Computing,\\ National University of Defense Technology, Changsha, 410073, China}
 
 \begin{abstract}
-Stochastic Gradient Descent (SGD) with variance reduction techniques has been proved powerful to train parameters of various machine learning models. However, it cannot support the distributed systems trivially due to the intrinsic design.  Although conventional studies such as PetuumSGD perform well for distributed machine learning tasks, they mainly focus on the optimization of the communication protocol, which do not exploit the potential benefits of a specific machine learning algorithm. We analyze the asynchronous communication protocol in PetuumSGD, and propose a distributed version of variance reduced SGD named \emph{DisSVRG}. Specifically, DisSVRG adopts a variance reduction technique to update the parameters of a model, and then shares those newly learned parameters across nodes in a cluster by using the asynchronous communication protocol. Besides, we accelerate DisSVRG by using the learning rate with an acceleration factor, and an adaptive sampling strategy is proposed in DisSVRG, which greatly reduces wait time during the iterations and speeds up the convergence of DisSVRG. Extensive empirical studies verify that DisSVRG  converges faster than the state-of-the-art variants of SGD, and gains almost linear speedup in a cluster.
+Stochastic Gradient Descent (SGD) with variance reduction techniques has been proved powerful to train the parameters of various machine learning models. However, it cannot support the distributed systems trivially due to the intrinsic design.  Although conventional studies such as PetuumSGD perform well for distributed machine learning tasks, they mainly focus on the optimization of the communication protocol, which do not exploit the potential benefits of a specific machine learning algorithm. We analyze the asynchronous communication protocol in PetuumSGD, and propose a distributed version of variance reduced SGD named \emph{DisSVRG}. Specifically, DisSVRG adopts the variance reduction technique to update the parameters of a model. After that,  those newly learned parameters across nodes in a cluster are shared by using the asynchronous communication protocol. Besides, we accelerate DisSVRG by using the learning rate with an acceleration factor, and an adaptive sampling strategy is proposed in DisSVRG, which greatly reduces wait time during the iterations and speeds up the convergence of DisSVRG. Extensive empirical studies verify that DisSVRG  converges faster than the state-of-the-art variants of SGD, and gains almost linear speedup in a cluster.
 \end{abstract}
 
 \begin{keyword}
@@ -134,14 +134,14 @@ Our distributed and asynchronous SGD denoted by DisSVRG is presented  in Algorit
     \caption{DisSVRG}
     \label{algorithm_dis_svrg}
     \begin{algorithmic}[1]
-        \State Initialize $\tilde{\omega}^0$. $ \verb|\\|$ Pull the global parameters by all trainers from the servers.
-        \For {$s=1,2,...$} $ \verb|\\|$ Asynchronously update the parameters by all trainers.
+        \State Initialize $\tilde{\omega}^0$. $ \verb|\\|$ Pull the global parameters by all workers from the servers.
+        \For {$s=1,2,...$} $ \verb|\\|$ Asynchronously update the parameters by all workers.
             \State $\tilde{\omega}=\tilde{\omega}^{s-1}$.
-            \State $\mu=\frac{1}{n}\sum\limits_{i=1}^n\nabla f_i(\tilde{\omega})$.
+            \State $\tilde{f}(\tilde{\omega})=\frac{1}{n}\sum\limits_{i=1}^n\nabla f_i(\tilde{\omega})$.
             \State $\omega_0=\tilde{\omega}$.
             \For {$t=1,2,..., m$}
                 \State randomly sample $i_t\in\{0,1,2,...,m\}$.
-                \State $v_t=\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\mu$. $ \verb|\\|$Variance reduced gradient.
+                \State $v_t=\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\tilde{f}(\tilde{\omega})$. $ \verb|\\|$Variance reduced gradient.
                 \State $\omega_t=\omega_{t-1}-\eta v_t$. $ \verb|\\|$Update the parameters with variance reduction gradient.
            \EndFor
            \State $\tilde{\omega}^s=\omega_m$. $ \verb|\\|$Push the newly learned parameters to the servers, and aggregate them with the global parameters.
@@ -161,14 +161,14 @@ The details are illustrated in Algorithm \ref{algorithm_dis_svrg_server}.
     \begin{algorithmic}[1]
         \State Initialize $\tilde{\omega}^0$.
         \While {true}
-            \If {receive a pull request from the trainer $p$.}
+            \If {receive a pull request from the worker $p$.}
                \State $e_p=p.epoch$.
-                \If {all the trainers have finished $(e_p-\tau)$th epoch.}
-                    \State send a copy of the global parameters to the trainer $p$.
+                \If {all the workers have finished $(e_p-\tau)$th epoch.}
+                    \State send a copy of the global parameters to the worker $p$.
                 \EndIf
             \EndIf
-            \If {receive a push request from the trainer $p$.}
-                \State receive the newly learned parameters from the trainer $p$.
+            \If {receive a push request from the worker $p$.}
+                \State receive the newly learned parameters from the worker $p$.
                 \State aggregate the newly learned parameters with the global parameters on the server.
             \EndIf
         \EndWhile
@@ -178,18 +178,18 @@ The details are illustrated in Algorithm \ref{algorithm_dis_svrg_server}.
 \textbf{Worker:} Workers in a cluster conduct machine learning tasks in asynchronous way. They pull the parameters from the servers by message passing. If a  copy of the global parameters is pulled to the workers, those workers begin iterative calculations. During an epoch, workers first randomly pick an instance from the training data, then use the instance to compute the gradient.  All the workers are independent with peers when conducting iterative calculations. When an epoch is finished, a worker has learned the new parameters, and will send those newly learned parameters to a server. It is the servers that control when to synchronize among the workers.
 
 \begin{algorithm}[t]
-    \caption{Trainer}
-    \label{algorithm_dis_svrg_trainer}
+    \caption{Worker}
+    \label{algorithm_dis_svrg_worker}
     \begin{algorithmic}[1]
         \While{true}
-            \State send a pull request to a server.
+            \State send a pull reworkerquest to a server.
             \While {true}
                 \If {receive a copy of the global parameters from the server.}
                     \State cache it as the new local parameters, i.e., $\tilde{\omega}$.
-                    \State $\mu=\frac{1}{n}\sum\limits_{i=1}^n\nabla f_i(\tilde{\omega})$.
+                    \State $\nabla \tilde{f}(\tilde{\omega})=\frac{1}{n}\sum\limits_{i=1}^n\nabla f_i(\tilde{\omega})$.
                     \For {$t=0,1,2,..., m$}
                        \State randomly sample a non-negative number $i$ with $i\in\{0,1, 2,...,n\}$.
-	              \State $v_t=\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\mu$.
+	              \State $v_t=\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\nabla \tilde{f}(\tilde{\omega})$.
 	              \State $\omega_t=\omega_{t-1}-\eta v_t$.
                     \EndFor
                     \State send  $\omega_m$ to a server.
@@ -201,7 +201,7 @@ The details are illustrated in Algorithm \ref{algorithm_dis_svrg_server}.
 
 \textbf{Aggregation:} When the workers push their newly learned parameters to the servers, those parameters will be aggregated with the global parameters on the servers. The average between the newly learned parameters and the global parameters will be identified as the latest global parameters, and will wait to be pushed to all the workers for the next iteration.
 
-\textbf{Update rule:} As illustrated in Algorithm \ref{algorithm_dis_svrg_trainer}, DisSVRG is significantly different from the standard SGD because of the variance reduction technique. In the standard SGD, the update rule is shown as follows.
+\textbf{Update rule:} As illustrated in Algorithm \ref{algorithm_dis_svrg_worker}, DisSVRG is significantly different from the standard SGD because of the variance reduction technique. In the standard SGD, the update rule is shown as follows.
 \begin{equation}
 \label{standard_sgd}
 v_t=\nabla f_{i_t}(\omega_{t-1})
@@ -209,15 +209,15 @@ v_t=\nabla f_{i_t}(\omega_{t-1})
 
 $v_t$ in the standard SGD is not the global gradient, which leads to variance, and slows the convergence of the loss function unavoidably. Instead, the variance reduction technique is used in DisSVRG effectively reduce the variance \cite{Johnson:9MAvkbgy}. Considering the $i$th round of the iterations, since $i_t$ is randomly picked, it holds that
 \begin{equation}
-\mathbb{E}\nabla f_{i_t}(\omega_{t-1})=\frac{1}{n}\nabla f(\omega_{t-1}),
+\mathbb{E}\nabla f_{i_t}(\omega_{t-1})=\nabla f(\omega_{t-1}),
 \end{equation}
 and
 \begin{equation}
-\mathbb{E}(-\nabla f_{i_t}(\tilde{\omega})+\mu)=-\frac{1}{n} \nabla f(\tilde{\omega})+\mathbb{E}(\mu)=0.
+\mathbb{E}(-\nabla f_{i_t}(\tilde{\omega})+ \nabla \tilde{f}(\tilde{\omega}))= - \nabla \tilde{f}(\tilde{\omega})+\nabla \tilde{f}(\tilde{\omega})=0.
 \end{equation}
 Therefore,
 \begin{equation}
-\mathbb{E}(\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\mu)=\mathbb{E}(\nabla f_{i_t}(\omega_{t-1}))=\frac{1}{n}\nabla f(\omega_{t-1}).
+\mathbb{E}( \nu_t )= \mathbb{E}(\nabla f_{i_t}(\omega_{t-1})-\nabla f_{i_t}(\tilde{\omega})+\tilde{f}(\omega))=\mathbb{E}(\nabla f_{i_t}(\omega_{t-1}))=\frac{1}{n}\nabla f(\omega_{t-1}).
 \end{equation}
 It is obvious that the variance of DisSVRG is reduced as expected. Unlike PetuumSGD and DownpourSGD, DisSVRG can converge fast without decaying the learning rate during the iterations. Benefiting from the variance reduction technique, DisSVRG  can converge at a constant rate.
 
