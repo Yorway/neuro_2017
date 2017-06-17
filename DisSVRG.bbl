@@ -117,22 +117,6 @@ Z.~Allen-Zhu, Y.~Yuan, {Improved SVRG for non-strongly-convex or
 L.~Xiao, T.~Zhang, A proximal stochastic gradient method with progressive
   variance reduction, SIAM Journal on Optimization 24~(4) (2014) 2057--2075.
 
-\bibitem{ho2013more}
-Q.~Ho, J.~Cipar, H.~Cui, S.~Lee, J.~K. Kim, P.~B. Gibbons, G.~A. Gibson,
-  G.~Ganger, E.~P. Xing, More effective distributed ml via a stale synchronous
-  parallel parameter server, in: Advances in neural information processing
-  systems, 2013, pp. 1223--1231.
-
-\bibitem{xing2015petuum}
-E.~P. Xing, Q.~Ho, W.~Dai, J.~K. Kim, J.~Wei, S.~Lee, X.~Zheng, P.~Xie,
-  A.~Kumar, Y.~Yu, Petuum: A new platform for distributed machine learning on
-  big data, IEEE Transactions on Big Data 1~(2) (2015) 49--67.
-
-\bibitem{dai2015high}
-W.~Dai, A.~Kumar, J.~Wei, Q.~Ho, G.~Gibson, E.~P. Xing, High-performance
-  distributed ml at scale through parameter server consistency models, in:
-  Twenty-Ninth AAAI Conference on Artificial Intelligence, 2015.
-
 \bibitem{Yuan:2015ka}
 J.~Yuan, F.~Gao, Q.~Ho, W.~Dai, J.~Wei, X.~Zheng, E.~P. Xing, T.-Y. Liu, W.-Y.
   Ma, Lightlda: Big topic models on modest computer clusters, in: Proc. WWW,
