@@ -38,7 +38,7 @@
 \address[mysecondaryaddress]{State Key Laboratory of High Performance Computing,\\ National University of Defense Technology, Changsha, 410073, China}
 
 \begin{abstract}
-Stochastic Gradient Descent (SGD) with variance reduction techniques has been proved powerful to train the parameters of various machine learning models. However, it cannot support the distributed systems trivially due to the intrinsic design.  Although conventional studies such as PetuumSGD perform well for distributed machine learning tasks, they mainly focus on the optimization of the communication protocol, which does not exploit the potential benefits of a specific machine learning algorithm. In the paper, we analyze the asynchronous communication protocol in PetuumSGD, and propose a distributed version of variance reduced SGD named \emph{DisSVRG}. DisSVRG adopts the variance reduction technique to update the parameters in a model. After that,  those newly learned parameters across nodes are shared by using the asynchronous communication protocol. Besides, we accelerate DisSVRG by using the adaptive learning rate with an acceleration factor. Additionally, an adaptive sampling strategy is proposed in DisSVRG. The proposed methods  greatly reduces the wait time during the iterations, and accelerates the convergence of DisSVRG significantly. Extensive empirical studies verify that DisSVRG  converges faster than the state-of-the-art variants of SGD, and gains almost linear speedup in a cluster.
+Stochastic Gradient Descent (SGD) with variance reduction techniques has been proved powerful to train the parameters of various machine learning models. However, it cannot support the distributed systems trivially due to the intrinsic design.  Although conventional studies such as PetuumSGD perform well for distributed machine learning tasks, they mainly focus on the optimization of the communication protocol, which does not exploit the potential benefits of a specific machine learning algorithm. In the paper, we analyze the asynchronous communication protocol in PetuumSGD, and propose a distributed version of variance reduced SGD named DisSVRG. DisSVRG adopts the variance reduction technique to update the parameters in a model. After that,  those newly learned parameters across nodes are shared by using the asynchronous communication protocol. Besides, we accelerate DisSVRG by using the adaptive learning rate with an acceleration factor. Additionally, an adaptive sampling strategy is proposed in DisSVRG. The proposed methods  greatly reduces the wait time during the iterations, and accelerates the convergence of DisSVRG significantly. Extensive empirical studies verify that DisSVRG  converges faster than the state-of-the-art variants of SGD, and gains almost linear speedup in a cluster.
 \end{abstract}
 
 \begin{keyword}
@@ -85,8 +85,55 @@ The variance reduced SGD denoted by \emph{SVRG} is adopted in \cite{Johnson:9MAv
 
 \section{Preliminaries}
 \label{sect_preliminary}
-In this section, we present the preliminaries including the parameter server system and the data parallelism, and the variance reduced SGD.
-\subsection{Parameter server and data parallelism}
+In this section, we present the preliminaries including the symbols and their notations, the parameter server system  and the variance reduced SGD.
+
+\subsection{Symbols and notations}
+\label{sect_symbols}
+As illustrated in Table \ref{table_symbols},  the main symbols used in the paper and their notations have been organized into a table. 
+
+
+
+\begin{table}[!t]
+
+\centering
+\scriptsize
+\caption{The highlight notations} \label{table_symbols}
+\begin{tabular}{|c|c|}
+\hline 
+Symbols & Notations\tabularnewline
+\hline 
+$\omega$ & the global parameters\tabularnewline
+\hline 
+$i_{t}$ & the index of an instance picked at the $t$th iteration randomly\tabularnewline
+\hline 
+$\nabla f_{i_{t}}$ & the stochastic gradient\tabularnewline
+\hline 
+$\nabla \tilde{f}_{i_t}$ & the noise reducer\tabularnewline
+\hline 
+$\nabla \tilde{f}$ & the stale full gradient\tabularnewline
+\hline 
+$\nu_t$ & the variance reduced gradient\tabularnewline
+\hline 
+$e_p$ & the number of epoches in the worker $p$\tabularnewline
+\hline 
+$\tau$ & the delay bound\tabularnewline
+\hline 
+$\sigma$ & the acceleration factor\tabularnewline
+\hline 
+$\delta$ & used in the adaptive sampling strategy \tabularnewline
+\hline 
+$\eta$ & the learning rate\tabularnewline
+\hline 
+$\parallel \cdot \parallel$ & the 2-norm defautly\tabularnewline
+\hline 
+$x_i, y_i$ & the $i$th instance and its label\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Parameter server}
 \label{parameter server}
 
 In data-parallel machine learning, the data set $D$ is partitioned into $P$ blocks. The blocks of data are assigned to the worker machines which are indexed by $p=1, \ldots, P$. We denote the $p$th data block by $D_p$. The data parallelism updates the model parameters as follows:
@@ -94,16 +141,16 @@ In data-parallel machine learning, the data set $D$ is partitioned into $P$ bloc
 \omega^s=G\left(\omega^{s-1}, \sum_{p=1}^P\Delta(\omega^{s-1}, D_p)\right).
 \end{equation} Here, $\Delta(\cdot)$ means the update of the parameters which is obtained according to the data partition $D_p$ on a worker. In specific, the worker needs to pull the initial parameters from the model server. After that, it computes the update of the parameters, i.e. $\Delta(\omega^{s-1}, D_p)$. $G(\cdot)$ represents the aggregation of the updates of the parameters on a server. Specifically, the server collects all the updates from the workers, and then conduct the aggregation \cite{ho2013more} \cite{xing2015petuum}. Taking SGD as an example, the update rule can be
 \begin{equation}
-\omega^s=\omega^{s-1} + \sum_{p=1}^P\eta \Delta(\omega^{s-1}, D_p),
+\omega^s=\omega^{s-1} + \sum_{p=1}^P \Delta(\omega^{s-1}, D_p),
 \end{equation}
 where $G(\cdot)$ is initialized as an additive operation, and $\Delta(\omega^{s-1}, D_p)$ is usually initialized  as the product of the learning rate $\eta$ and the gradient according to the data partition $D_p$. As shown in Figure \ref{figure_data_parallelism},  servers and workers interact via a bipartite topology. The model parameters $\omega$ can be divided and stored on multiple servers and thus not limited by a single machine's memory in a parameter server system. Every worker pulls the parameters from the server, and then  obtain the update of the parameters. Finally, those updates are pushed to the servers, and are aggregated on those servers. The servers can collaborate with the workers to utilize CPUs on all machines when we conduct a large scale machine learning task \cite{dai2015high} \cite{ho2013more}.
 
 \begin{figure*}
 \centering
-\label{figure_data_parallelism}
+
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/data_parallelism_on_PS}\label{figure_data_parallelism_on_PS}}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/PS_topology}\label{figure_PS_topology}}
-\caption{Illustration of data parallelism and Parameter Server topology}
+\caption{Illustration of data parallelism and Parameter Server topology} \label{figure_data_parallelism}
 \end{figure*}
 
 
@@ -340,5 +387,16 @@ We thank the National Supercomputing Center in Changsha for providing \emph{Tian
 \section*{References}
 \bibliographystyle{elsarticle-num}
 \bibliography{reference}
+
+
+
+{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{JianpingYin.pdf}}{Jianping Yin} received Ph.D. degree in computer science and technology from the National University of Defense Technology (NUDT) in 1990. 
+
+He currently holds the positions of professor and the head of China Computer Federation Technical Committee on Theoretical Computer Science. His research interests include artificial intelligence, pattern recognition and network algorithms.
+
+
+
+
+
 
 \end{document}
