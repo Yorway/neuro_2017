@@ -20,6 +20,19 @@ R.~Collobert, J.~Weston, A unified architecture for natural language
   processing: Deep neural networks with multitask learning, in: Proc. ACM ICML,
   2008, pp. 160--167.
 
+\bibitem{Vidaurre:2013cu}
+D.~Vidaurre, C.~Bielza, P.~Larra{\~n}aga, {A Survey of L1Regression},
+  International Statistical Review 81~(3) (2013) 361--387.
+
+\bibitem{Gnecco2015Learning}
+G.~Gnecco, M.~Gori, S.~Melacci, M.~Sanguineti, Learning with mixed hard/soft
+  pointwise constraints., IEEE Transactions on Neural Networks \& Learning
+  Systems 26~(9) (2015) 2019.
+
+\bibitem{Cucker2002On}
+F.~Cucker, S.~Smale, On the mathematical foundations of learning, Bulletin of
+  the American Mathematical Society 39~(1) (2002) 332.
+
 \bibitem{Dean:2012wx}
 J.~Dean, G.~Corrado, R.~Monga, K.~C. 0010, M.~Devin, Q.~V. Le, M.~Z. Mao,
   M.~Ranzato, A.~W. Senior, P.~A. Tucker, K.~Yang, A.~Y. Ng, Large scale
@@ -54,6 +67,21 @@ R.~L. Cavalcante, I.~Yamada, B.~Mulgrew, An adaptive projected subgradient
   approach to learning in diffusion networks, Transactions on Signal Processing
   57~(7) (2009) 2762--2774.
 
+\bibitem{Zhang:2015tp}
+S.~Z. Zhang, Ruiliang, J.~T. Kwok, Fast distributed asynchronous sgd with
+  variance reduction, arXiv:1508.01633.
+
+\bibitem{Harlap:2016ia}
+A.~Harlap, H.~Cui, W.~Dai, J.~Wei, G.~R. Ganger, P.~B. Gibbons, G.~A. Gibson,
+  E.~P. Xing, {Addressing the straggler problem for iterative convergent
+  parallel ML}, in: the Seventh ACM Symposium, ACM Press, New York, New York,
+  USA, 2016, pp. 98--111.
+
+\bibitem{Li:2014jg}
+M.~Li, T.~Zhang, Y.~Chen, A.~J. Smola, {Efficient mini-batch training for
+  stochastic optimization}, in: the 20th ACM SIGKDD international conference,
+  ACM Press, New York, New York, USA, 2014, pp. 661--670.
+
 \bibitem{Mania:2015wa}
 H.~Mania, X.~Pan, D.~Papailiopoulos, B.~Recht, K.~Ramchandran, M.~I. Jordan,
   Perturbed iterate analysis for asynchronous stochastic optimization,
@@ -64,14 +92,35 @@ X.~Lian, Y.~Huang, Y.~Li, J.~Liu, Asynchronous parallel stochastic gradient for
   nonconvex optimization, in: Advances in Neural Information Processing
   Systems, 2015, pp. 2719--2727.
 
+\bibitem{Pan:2016wx}
+X.~Pan, M.~Lam, S.~Tu, D.~Papailiopoulos, C.~Zhang, M.~I. Jordan,
+  K.~Ramchandran, C.~Re, B.~Recht, {CYCLADES: Conflict-free Asynchronous
+  Machine Learning}\href {http://arxiv.org/abs/1605.09721v1}
+  {\path{arXiv:1605.09721v1}}.
+
+\bibitem{Defazio:2014vu}
+A.~Defazio, F.~Bach, S.~Lacoste-Julien, Saga: A fast incremental gradient
+  method with support for non-strongly convex composite objectives, in:
+  Advances in Neural Information Processing Systems, Montr{\'e}al, Canda, 2014,
+  pp. 1646--1654.
+
+\bibitem{Richtarik:2013te}
+J.~Kone{\v{c}}n{\`y}, P.~Richt{\'a}rik, Semi-stochastic gradient descent
+  methods, arXiv preprint arXiv:1312.1666.
+
+\bibitem{Allen2015Improved}
+Z.~Allen-Zhu, Y.~Yuan, {Improved SVRG for non-strongly-convex or
+  sum-of-non-convex objectives}, in: International Conference on Machine
+  Learning, New York, USA, 2016.
+
+\bibitem{Xiao:2014vw}
+L.~Xiao, T.~Zhang, A proximal stochastic gradient method with progressive
+  variance reduction, SIAM Journal on Optimization 24~(4) (2014) 2057--2075.
+
 \bibitem{Yuan:2015ka}
 J.~Yuan, F.~Gao, Q.~Ho, W.~Dai, J.~Wei, X.~Zheng, E.~P. Xing, T.-Y. Liu, W.-Y.
   Ma, Lightlda: Big topic models on modest computer clusters, in: Proc. WWW,
   2015, pp. 1351--1361.
-
-\bibitem{Zhang:2015tp}
-S.~Z. Zhang, Ruiliang, J.~T. Kwok, Fast distributed asynchronous sgd with
-  variance reduction, arXiv:1508.01633.
 
 \bibitem{2015_dai_high_performance_ml}
 W.~Dai, A.~Kumar, J.~Wei, Q.~Ho, G.~A. Gibson, E.~P. Xing, High-performance
