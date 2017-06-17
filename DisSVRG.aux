@@ -23,6 +23,7 @@
 \citation{Coates2011An}
 \citation{dahl2012context}
 \citation{collobert2008unified}
+\citation{Vidaurre:2013cu,Gnecco2015Learning,Cucker2002On}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}}
 \newlabel{introduction}{{1}{2}{Introduction}{section.1}{}}
 \newlabel{equa_loss_minimization}{{1}{2}{Introduction}{equation.1.1}{}}
@@ -33,103 +34,119 @@
 \citation{Cavalcante:2009il}
 \citation{Li:2014tt}
 \citation{Xing:2015ib}
+\citation{Zhang:2015tp}
+\citation{Harlap:2016ia}
+\citation{Li:2014jg}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related work}{5}{section.2}}
 \newlabel{related_work}{{2}{5}{Related work}{section.2}{}}
 \citation{Johnson:9MAvkbgy}
-\citation{Zhao:SZfxEHHg,Reddi:2015vj,Mania:2015wa,lian2015asynchronous}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Preliminaries}{6}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Notations}{6}{subsection.3.1}}
-\newlabel{notations}{{3.1}{6}{Notations}{subsection.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Assumptions}{6}{subsection.3.2}}
-\newlabel{equa_l_smooth}{{3}{6}{Assumptions}{equation.3.3}{}}
+\citation{Zhao:SZfxEHHg,Reddi:2015vj,Mania:2015wa,lian2015asynchronous,Pan:2016wx}
+\citation{Defazio:2014vu}
+\citation{Richtarik:2013te}
+\citation{Allen2015Improved}
+\citation{Xiao:2014vw}
 \newlabel{figure_data_parallelism_on_PS}{{1(a)}{7}{Subfigure 1(a)}{subfigure.1.1}{}}
 \newlabel{sub@figure_data_parallelism_on_PS}{{(a)}{7}{Subfigure 1(a)\relax }{subfigure.1.1}{}}
 \newlabel{figure_PS_topology}{{1(b)}{7}{Subfigure 1(b)}{subfigure.1.2}{}}
 \newlabel{sub@figure_PS_topology}{{(b)}{7}{Subfigure 1(b)\relax }{subfigure.1.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Illustration of data parallelism and Parameter Server topology}}{7}{figure.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{7}{figure.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{7}{figure.1}}
 \newlabel{figure_PS_and_data_parallelism}{{1}{7}{Illustration of data parallelism and Parameter Server topology}{figure.1}{}}
-\newlabel{equa_gamma_convex}{{4}{7}{Assumptions}{equation.3.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Parameter server and data parallelism}{7}{subsection.3.3}}
-\newlabel{notations}{{3.3}{7}{Parameter server and data parallelism}{subsection.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}System implementation}{7}{section.4}}
-\newlabel{implementation}{{4}{7}{System implementation}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Overview}{7}{subsection.4.1}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces DisSVRG}}{8}{algorithm.1}}
-\newlabel{algorithm_dis_svrg}{{1}{8}{Overview}{algorithm.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Distributed implementation}{8}{subsection.4.2}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Server}}{9}{algorithm.2}}
-\newlabel{algorithm_dis_svrg_server}{{2}{9}{Distributed implementation}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Preliminaries}{7}{section.3}}
+\newlabel{sect_preliminary}{{3}{7}{Preliminaries}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Notations}{7}{subsection.3.1}}
+\newlabel{notations}{{3.1}{7}{Notations}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Parameter server and data parallelism}{7}{subsection.3.2}}
+\newlabel{notations}{{3.2}{7}{Parameter server and data parallelism}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Variance reduced SGD}{7}{subsection.3.3}}
+\newlabel{equa_vr_gradient}{{2}{7}{Variance reduced SGD}{equation.3.2}{}}
+\newlabel{equa_vr_gradient}{{3}{8}{Variance reduced SGD}{equation.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}System implementation}{8}{section.4}}
+\newlabel{implementation}{{4}{8}{System implementation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Overview}{8}{subsection.4.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces DisSVRG}}{9}{algorithm.1}}
+\newlabel{algorithm_dis_svrg}{{1}{9}{Overview}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Distributed implementation}{9}{subsection.4.2}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Server}}{10}{algorithm.2}}
+\newlabel{algorithm_dis_svrg_server}{{2}{10}{Distributed implementation}{algorithm.2}{}}
 \citation{Johnson:9MAvkbgy}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Trainer}}{10}{algorithm.3}}
-\newlabel{algorithm_dis_svrg_trainer}{{3}{10}{Distributed implementation}{algorithm.3}{}}
-\newlabel{standard_sgd}{{5}{10}{Distributed implementation}{equation.4.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Trainer}}{11}{algorithm.3}}
+\newlabel{algorithm_dis_svrg_trainer}{{3}{11}{Distributed implementation}{algorithm.3}{}}
+\newlabel{standard_sgd}{{4}{11}{Distributed implementation}{equation.4.4}{}}
 \citation{Johnson:9MAvkbgy}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Optimization of DisSVRG}{11}{section.5}}
-\newlabel{optimization_sgd}{{5}{11}{Optimization of DisSVRG}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Learning rate with an acceleration factor}{11}{subsection.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Adaptive sampling strategy}{12}{subsection.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Optimization of DisSVRG}{12}{section.5}}
+\newlabel{optimization_sgd}{{5}{12}{Optimization of DisSVRG}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Learning rate with an acceleration factor}{12}{subsection.5.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The learning rate with the acceleration factor makes DisSVRG converge fast significantly.}}{13}{figure.2}}
 \newlabel{figure_evaluation_accelerated_factor}{{2}{13}{The learning rate with the acceleration factor makes DisSVRG converge fast significantly}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Adaptive sampling strategy}{14}{subsection.5.2}}
 \citation{Xing:2015ib}
 \citation{Yuan:2015ka}
-\newlabel{figure_evaluation_random_strategy_accelerated_factor}{{3(a)}{14}{Subfigure 3(a)}{subfigure.3.1}{}}
-\newlabel{sub@figure_evaluation_random_strategy_accelerated_factor}{{(a)}{14}{Subfigure 3(a)\relax }{subfigure.3.1}{}}
-\newlabel{figure_evaluation_random_strategy_wait_time}{{3(b)}{14}{Subfigure 3(b)}{subfigure.3.2}{}}
-\newlabel{sub@figure_evaluation_random_strategy_wait_time}{{(b)}{14}{Subfigure 3(b)\relax }{subfigure.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A large $m$ leads to a fast convergence for DisSVRG, and reduces much wait time during iterations.}}{14}{figure.3}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{14}{figure.3}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{14}{figure.3}}
-\newlabel{figure_evaluation_random_strategy}{{3}{14}{A large $m$ leads to a fast convergence for DisSVRG, and reduces much wait time during iterations}{figure.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{14}{section.6}}
-\newlabel{discussion}{{6}{14}{Discussion}{section.6}{}}
+\newlabel{figure_evaluation_random_strategy_accelerated_factor}{{3(a)}{15}{Subfigure 3(a)}{subfigure.3.1}{}}
+\newlabel{sub@figure_evaluation_random_strategy_accelerated_factor}{{(a)}{15}{Subfigure 3(a)\relax }{subfigure.3.1}{}}
+\newlabel{figure_evaluation_random_strategy_wait_time}{{3(b)}{15}{Subfigure 3(b)}{subfigure.3.2}{}}
+\newlabel{sub@figure_evaluation_random_strategy_wait_time}{{(b)}{15}{Subfigure 3(b)\relax }{subfigure.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A large $m$ leads to a fast convergence for DisSVRG, and reduces much wait time during iterations.}}{15}{figure.3}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{15}{figure.3}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{15}{figure.3}}
+\newlabel{figure_evaluation_random_strategy}{{3}{15}{A large $m$ leads to a fast convergence for DisSVRG, and reduces much wait time during iterations}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{15}{section.6}}
+\newlabel{discussion}{{6}{15}{Discussion}{section.6}{}}
 \citation{Zhang:2015tp}
 \citation{Zhang:2015tp}
 \citation{2015_dai_high_performance_ml,Li:2014uy,Dai:2013vj}
 \citation{Zhang:2015tp}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Performance evaluation}{16}{section.7}}
-\newlabel{performance_evaluation}{{7}{16}{Performance evaluation}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Performance evaluation}{17}{section.7}}
+\newlabel{performance_evaluation}{{7}{17}{Performance evaluation}{section.7}{}}
 \citation{Yuan:2015ka}
 \citation{Xing:2015ib}
 \citation{Zhang:2015tp}
 \citation{Zhang:2015tp}
-\newlabel{regression}{{10}{17}{Performance evaluation}{equation.7.10}{}}
-\newlabel{classification}{{11}{17}{Performance evaluation}{equation.7.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Convergence}{18}{subsection.7.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Speedup}{18}{subsection.7.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The performance of the convergence is compared by using $32$ computing nodes.}}{19}{figure.4}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{19}{figure.4}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{19}{figure.4}}
-\newlabel{figure_evaluation1_convergence}{{4}{19}{The performance of the convergence is compared by using $32$ computing nodes}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Wait time}{19}{subsection.7.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces DisSVRG obtains almost linear speedup when varying the number of workers.}}{20}{figure.5}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{20}{figure.5}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{20}{figure.5}}
-\newlabel{figure_evaluation2_speedup}{{5}{20}{DisSVRG obtains almost linear speedup when varying the number of workers}{figure.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{20}{section.8}}
-\newlabel{conclusion}{{8}{20}{Conclusion}{section.8}{}}
+\newlabel{regression}{{9}{18}{Performance evaluation}{equation.7.9}{}}
+\newlabel{classification}{{10}{18}{Performance evaluation}{equation.7.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Convergence}{19}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Speedup}{19}{subsection.7.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The performance of the convergence is compared by using $32$ computing nodes.}}{20}{figure.4}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{20}{figure.4}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{20}{figure.4}}
+\newlabel{figure_evaluation1_convergence}{{4}{20}{The performance of the convergence is compared by using $32$ computing nodes}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Wait time}{20}{subsection.7.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces DisSVRG obtains almost linear speedup when varying the number of workers.}}{21}{figure.5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{21}{figure.5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{21}{figure.5}}
+\newlabel{figure_evaluation2_speedup}{{5}{21}{DisSVRG obtains almost linear speedup when varying the number of workers}{figure.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{21}{section.8}}
+\newlabel{conclusion}{{8}{21}{Conclusion}{section.8}{}}
 \bibstyle{elsarticle-num}
 \bibdata{reference}
 \bibcite{Coates2011An}{{1}{}{{}}{{}}}
 \bibcite{dahl2012context}{{2}{}{{}}{{}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The time consumption is compared by varying the delay $\tau $ for $128$ workers.}}{21}{figure.6}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{21}{figure.6}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{21}{figure.6}}
-\newlabel{figure_evaluation3_delay}{{6}{21}{The time consumption is compared by varying the delay $\tau $ for $128$ workers}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The time consumption is compared by varying the delay $\tau $ for $128$ workers.}}{22}{figure.6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\emph {YearPredictionMSD}}}}{22}{figure.6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {dna}}}}{22}{figure.6}}
+\newlabel{figure_evaluation3_delay}{{6}{22}{The time consumption is compared by varying the delay $\tau $ for $128$ workers}{figure.6}{}}
 \bibcite{collobert2008unified}{{3}{}{{}}{{}}}
-\bibcite{Dean:2012wx}{{4}{}{{}}{{}}}
-\bibcite{Li:2014tt}{{5}{}{{}}{{}}}
-\bibcite{Xing:2015ib}{{6}{}{{}}{{}}}
-\bibcite{Johnson:9MAvkbgy}{{7}{}{{}}{{}}}
-\bibcite{Zhao:SZfxEHHg}{{8}{}{{}}{{}}}
-\bibcite{Reddi:2015vj}{{9}{}{{}}{{}}}
-\bibcite{Cavalcante:2009il}{{10}{}{{}}{{}}}
-\bibcite{Mania:2015wa}{{11}{}{{}}{{}}}
-\bibcite{lian2015asynchronous}{{12}{}{{}}{{}}}
-\bibcite{Yuan:2015ka}{{13}{}{{}}{{}}}
+\bibcite{Vidaurre:2013cu}{{4}{}{{}}{{}}}
+\bibcite{Gnecco2015Learning}{{5}{}{{}}{{}}}
+\bibcite{Cucker2002On}{{6}{}{{}}{{}}}
+\bibcite{Dean:2012wx}{{7}{}{{}}{{}}}
+\bibcite{Li:2014tt}{{8}{}{{}}{{}}}
+\bibcite{Xing:2015ib}{{9}{}{{}}{{}}}
+\bibcite{Johnson:9MAvkbgy}{{10}{}{{}}{{}}}
+\bibcite{Zhao:SZfxEHHg}{{11}{}{{}}{{}}}
+\bibcite{Reddi:2015vj}{{12}{}{{}}{{}}}
+\bibcite{Cavalcante:2009il}{{13}{}{{}}{{}}}
 \bibcite{Zhang:2015tp}{{14}{}{{}}{{}}}
-\bibcite{2015_dai_high_performance_ml}{{15}{}{{}}{{}}}
-\bibcite{Li:2014uy}{{16}{}{{}}{{}}}
-\bibcite{Dai:2013vj}{{17}{}{{}}{{}}}
+\bibcite{Harlap:2016ia}{{15}{}{{}}{{}}}
+\bibcite{Li:2014jg}{{16}{}{{}}{{}}}
+\bibcite{Mania:2015wa}{{17}{}{{}}{{}}}
+\bibcite{lian2015asynchronous}{{18}{}{{}}{{}}}
+\bibcite{Pan:2016wx}{{19}{}{{}}{{}}}
+\bibcite{Defazio:2014vu}{{20}{}{{}}{{}}}
+\bibcite{Richtarik:2013te}{{21}{}{{}}{{}}}
+\bibcite{Allen2015Improved}{{22}{}{{}}{{}}}
+\bibcite{Xiao:2014vw}{{23}{}{{}}{{}}}
+\bibcite{Yuan:2015ka}{{24}{}{{}}{{}}}
+\bibcite{2015_dai_high_performance_ml}{{25}{}{{}}{{}}}
+\bibcite{Li:2014uy}{{26}{}{{}}{{}}}
+\bibcite{Dai:2013vj}{{27}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
