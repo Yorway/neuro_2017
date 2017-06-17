@@ -55,10 +55,12 @@ Machine learning based applications such as image recognition \cite{Coates2011An
 Many machine learning algorithms can be described by the optimization problem like (\ref{equa_loss_minimization}),
 \begin{equation}
 \label{equa_loss_minimization}
+
 \min f(\omega),~~~~~f(\omega)=\frac{1}{n}\sum\limits_{i=1}^n f_i(\omega) + R(\omega),\\
 \end{equation}  Here, $\nabla$ stands for the derivation operation. $f(\omega)$ is generally called the loss function.  $\omega$ represents the parameters of a model, that is, the parameters needed to be updated during the iterations. $n$ means the size of training data. $R(\omega)$ represents the regularization item which is used to avoid overfitting. The regularization item represents the prior knowledge about the problem. For example, when we want to obtain a sparse solution, that is, the optimal parameters contain many zeros, $R(\omega)$ is usually formulated as $L_1$ norm, namely, $R(\omega) = \lVert \omega \rVert_1$. Besides, ridge regression modes use the $L_2$ norm as the regularization item, that is, $R(\omega) = \lVert \omega \rVert_2$. Some other regularizations can be used in the optimization objective \cite{Vidaurre:2013cu, Gnecco2015Learning, Cucker2002On}, but it is out of the scope of the paper. We recommend readers to read those references for more details. 
 
 The loss function $f(\omega)$ can be minimized by updating the parameters iteratively, which is called the learning process. Conventionally, the gradient descent method is used to compute the global average gradient, i.e., $\nabla f(\omega_{t-1})$, and then uses it to update the parameters during an iteration. Here, $t$ represents the $t$th iteration. Since $\nabla f(\omega_{t-1})$ needs $n$ derivations, which are time-consuming, the gradient descent method is not practical for a large scale learning task.  An alternative approach  is Stochastic  Gradient Descent (SGD) and its variants. SGD randomly samples an instance from the training data, and then use it to compute the local gradient, i.e., $\nabla f_i(\omega_{t-1})$, instead of the global average gradient.   The parameters are thus updated by using the local gradient. Since $\nabla f_i(\omega_{t-1})$ merely needs one derivation for the local gradient during an iteration,  it is efficient for the large scale learning tasks.  However, since $f_i$ is randomly sampled, the variance exists between the local gradient $\nabla f_i(\omega_{t-1})$ and the global average gradient $\nabla f(\omega_{t-1})$, which slows the convergence of the loss function i.e., $f(\omega)$, of a machine learning algorithm.  Specifically, when the parameters are close to the optimal state, it is difficult to decrease the loss function due to the variance. Conventionally, the variance is reduced by using a decaying learning rate to update the parameters. That is,  the value of the learning rate is decreased when the iteration proceeds. Although the variance can be reduced by the decaying learning rate, the small learning rate unavoidably  leads to the slow convergence.
+
 
 Recently, the SGD and its variants have been widely used to train the parameters of a model in distributed memory systems \cite{Dean:2012wx, Li:2014tt, Xing:2015ib}. Those versions of SGD generally train and update parameters in a parameter-server system by using a cluster. The nodes in the parameter-server system are categorized into servers and workers. The underlying calculations of the gradients are conducted by workers. Those updates will be then pushed to servers, and be aggregated on servers for updating the global parameters. Finally, those newly learned global parameters will be shared with workers. Since there exists much communication between workers and servers, all the distributed versions of SGD like PetuumSGD focus on the optimization of communication \cite{Xing:2015ib}.  In specific, PetuumSGD has proposed the asynchronous communication protocol denoted by Staleness Synchronous Protocol (SSP) to conduct communication across nodes. SSP outperforms the Bulk Synchronous Protocol (BSP) employed on Hadoop or Spark significantly. However, since SSP is designed for the general iteratively convergent machine learning algorithms, it does not exploit the potential benefits of SGD to accelerate the iterative calculations. For example, PetuumSGD updates the parameters by using a decaying learning rate. The learning rate in PetuumSGD in the current iteration denoted by $\eta$ will become $0.95\eta$ in the next iteration. When the parameters are close to the optimal state, the loss function is difficult to be decreased due to the extremely small learning rate. In a nutshell,   even though PetuumSGD adopts SSP  to optimize the communication between workers and servers, the decay learning rate slows the convergence.
 
@@ -66,7 +68,9 @@ Meanwhile, a new technique of the variance reduction is proposed to speed up the
 
 In this paper, we design a distributed and asynchronous version of variance reduced SGD denoted by DisSVRG for large-scale machine learning tasks. It is worth noting that DisSVRG adopts the asynchronous communication protocol, i.e., Staleness Synchronous Protocol (SSP). In order to obtain a fast convergence, DisSVRG is accelerated by using a learning rate with an acceleration factor. It is unavoidable that the fast workers will spend much time on waiting for the slow workers when performing iterative calculations  in a cluster, which is also known as the "straggler problem". The straggler problem wastes much time for the fast workers, thus leads to the slow convergence of a machine learning algorithm. In order to reduce the wait time, we propose an adaptive sampling strategy to alleviate the straggler problem. Specifically, we dynamically adjust the random sampling strategy during the iterations. When the worker is faster than other workers, it will  sample more instances for the next iteration, which will take the faster worker more time to compute the local gradient.   Thus, the slow workers have chance to catch up with the faster works, and  the wait time is reduced significantly. Finally, we conduct empirical studies on the HPC cluster of the \emph{Tianhe-1} supercomputer which is located in the National Supercomputing Center in Changsha. The performance evaluation verifies that DisSVRG outperforms the state-of-the-art version of SGD, and obtains approximately linear speedup in the cluster.
 
+
 The rest of this paper is organized as follows. Section \ref{related_work} outlines the related work. Section \ref{sect_preliminary} presents the preliminaries of our method. Section \ref{implementation} illustrates the details of DisSVRG. Section \ref{optimization_sgd} highlights the  optimization of DisSVRG. Section \ref{discussion} discusses the major difference between our work and the previous studies. Section \ref{performance_evaluation} shows the performance evaluation. Section \ref{conclusion} concludes the paper.
+
 
 \section{Related work}
 \label{related_work}
@@ -86,10 +90,26 @@ The variance reduced SGD denoted by \emph{SVRG} is adopted in \cite{Johnson:9MAv
 
 
 
-\section{Preliminaries}
-\label{sect_preliminary}
-\subsection{Notations}
-\label{notations}
+\subsection{Parameter server and data parallelism}
+\label{parameter server}
+
+In this subsection, we will introduce the data-parallel computation paradigm and the parameter server abstraction that facilitates large-scale data-parallel computation.
+
+In data-parallel machine learning the data set $D$ is partitioned and assigned to worker machines, indexed by $p=1, \ldots, P$, as Fig. \ref{figure_data_parallelism_on_PS} shows. We denote the $p$-th data partition by $D_p$ and the model parameters at iteration $t$ by $\omega^t$. The data-parallel computation updates the model parameters as follows:
+\begin{equation}
+\omega^t=G(\omega^{t-1}, \sum_{p=1}^P\Delta(\omega^{t-1}, D_p)).
+\end{equation}
+Here, $\Delta()$ performs computation on data partition $D_p$ independently using full model parameters $\omega^{t-1}$ pulled from the model server, and $G()$ aggregates current model parameters $\omega^{t-1}$ with the sum of $\Delta()$ outputs that are computed by the workers and pushed to the server\cite{ho2013more} \cite{xing2015petuum}.
+For example, in SGD, the update equation can be
+\begin{equation}
+\omega^t=\omega^{t-1} + \sum_{p=1}^P\eta \nabla f_i(\omega^{t-1}),
+\end{equation}
+where $G()$ is specificized as an additive operation and $\Delta(\omega^{t-1}, D_p)$ is specificized as the product of the learning rate $\eta$ and the gradient computed using the sample $i$ from $D_p$.
+
+Parameter server follows a simple table-based API for pull/push, i.e., reading/updating, to shared parameters $\omega$. 
+The model parameters $\omega$ can be divided (sharded) and stored over multiple servers and thus not limited by a single machine's memory.
+Servers and workers interact via a bipartite topology, as Fig. \ref{figure_PS_topology} shows. Note that this is the logical topology. Physically the servers can collocate with the wokers to utilize CPU on all machines and a normal configuration would include a server process on each of the worker machines. \cite{dai2015high} \cite{ho2013more}
+
 
 
 \subsection{Parameter server and data parallelism}
@@ -97,11 +117,11 @@ The variance reduced SGD denoted by \emph{SVRG} is adopted in \cite{Johnson:9MAv
 
 \begin{figure*}
 \centering
+
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/data_parallelism_on_PS}\label{figure_data_parallelism_on_PS}}
 \subfigure{\includegraphics[width=0.49\columnwidth]{figures/PS_topology}\label{figure_PS_topology}}
 \caption{Illustration of data parallelism and Parameter Server topology}
-\label{figure_PS_and_data_parallelism}
-\end{figure*}
+
 
 
 \subsection{Variance reduced SGD}
